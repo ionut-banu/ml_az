@@ -9,18 +9,48 @@ Original file is located at
 # Artificial Neural Network
 
 ### Importing the libraries
+"""
 
-## Part 1 - Data Preprocessing
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+
+tf.__version__
+
+"""## Part 1 - Data Preprocessing
 
 ### Importing the dataset
+"""
 
-### Encoding categorical data
+dataset = pd.read_csv('Churn_Modelling.csv')
+X = dataset.iloc[:, 3:-1].values
+y = dataset.iloc[:, -1].values
+
+print(X)
+
+print(y)
+
+"""### Encoding categorical data
 
 Label Encoding the "Gender" column
+"""
 
-One Hot Encoding the "Geography" column
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+X[:, 2] = le.fit_transform(X[:, 2])
 
-### Splitting the dataset into the Training set and Test set
+print(X)
+
+"""One Hot Encoding the "Geography" column"""
+
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+ct = ColumnTransformer(transformers=[('encoder', OneHotEncoder(), [1])], remainder='passthrough')
+X = np.array(ct.fit_transform(X))
+
+print(X)
+
+"""### Splitting the dataset into the Training set and Test set
 
 ### Feature Scaling
 
