@@ -50,21 +50,38 @@ X = np.array(ct.fit_transform(X))
 
 print(X)
 
-"""### Splitting the dataset into the Training set and Test set
+"""### Splitting the dataset into the Training set and Test set"""
 
-### Feature Scaling
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
-## Part 2 - Building the ANN
+"""### Feature Scaling"""
+
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+
+"""## Part 2 - Building the ANN
 
 ### Initializing the ANN
+"""
 
-### Adding the input layer and the first hidden layer
+ann = tf.keras.models.Sequential()
 
-### Adding the second hidden layer
+"""### Adding the input layer and the first hidden layer"""
 
-### Adding the output layer
+ann.add(tf.keras.layers.Dense(units = 6, activation = 'relu'))
 
-## Part 3 - Training the ANN
+"""### Adding the second hidden layer"""
+
+ann.add(tf.keras.layers.Dense(units = 6, activation = 'relu'))
+
+"""### Adding the output layer"""
+
+ann.add(tf.keras.layers.Dense(units = 1, activation = 'sigmoid'))
+
+"""## Part 3 - Training the ANN
 
 ### Compiling the ANN
 
