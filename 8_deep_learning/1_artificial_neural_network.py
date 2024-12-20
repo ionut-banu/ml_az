@@ -84,10 +84,15 @@ ann.add(tf.keras.layers.Dense(units = 1, activation = 'sigmoid'))
 """## Part 3 - Training the ANN
 
 ### Compiling the ANN
+"""
 
-### Training the ANN on the Training set
+ann.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
-## Part 4 - Making the predictions and evaluating the model
+"""### Training the ANN on the Training set"""
+
+ann.fit(X_train, y_train, batch_size = 32, epochs = 100)
+
+"""## Part 4 - Making the predictions and evaluating the model
 
 ### Predicting the result of a single observation
 
@@ -126,6 +131,8 @@ Therefore, our ANN model predicts that this customer stays in the bank!
 **Important note 2:** Notice also that the "France" country was not input as a string in the last column but as "1, 0, 0" in the first three columns. That's because of course the predict method expects the one-hot-encoded values of the state, and as we see in the first row of the matrix of features X, "France" was encoded as "1, 0, 0". And be careful to include these values in the first three columns, because the dummy variables are always created in the first columns.
 
 ### Predicting the Test set results
-
-### Making the Confusion Matrix
 """
+
+
+
+"""### Making the Confusion Matrix"""
